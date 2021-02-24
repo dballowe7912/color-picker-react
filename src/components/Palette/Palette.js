@@ -12,12 +12,18 @@ class Palette extends Component {
         }
 
         this.changeLevel = this.changeLevel.bind(this);
+        this.changeFormat = this.changeFormat.bind(this);
+        
     }
 
     changeLevel(level) {
         this.setState({
             level
         })
+    }
+
+    changeFormat(event){
+        alert(event.target.value);
     }
 
     render() {
@@ -28,7 +34,10 @@ class Palette extends Component {
         ));
         return (
             <div className="Palette">
-                <Navbar level={level} changeLevel={this.changeLevel}/>
+                <Navbar 
+                    level={level} 
+                    changeLevel={this.changeLevel}
+                    handleChange={this.changeFormat}/>
                 <div className="Palette-colors">
                 {colorBoxes}
                 </div>
