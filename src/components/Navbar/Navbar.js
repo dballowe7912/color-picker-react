@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Slider, { Range } from 'rc-slider';
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+
 import 'rc-slider/assets/index.css';
 import "./Navbar.css";
 
@@ -11,10 +15,12 @@ class Navbar extends Component {
         super(props);
 
         this.state = { 
-            format: "hex" 
+            format: "hex",
+            open: true 
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.closeSnackbar = this.closeSnackbar.bind(this);
     }
 
     handleChange(event) {
@@ -22,6 +28,11 @@ class Navbar extends Component {
         this.props.handleChange(event.target.value);
     }
   
+    closeSnackbar() {
+        this.setState({
+            open: false
+        })
+    }
 
     render() {
         const { level, changeLevel, handleChange } = this.props;
@@ -53,6 +64,21 @@ class Navbar extends Component {
                         <MenuItem value="rgba">RGBA rgba(255, 255, 255, 1.0)</MenuItem>
                     </Select>
                 </div>
+                <Snackbar 
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }} 
+                    open={this.state.open} 
+                    autoHideDuration={3000} 
+                    message={<span id="message-id">Format Changed</span>} 
+                    ContentProps={{
+                        "aria-describedby": "message-id"
+                    }}
+                    action={[
+                        <IconButton onClick={this.closeSnackbar} color="inherit">
+                            <CloseIcon />
+                        </IconButton>
+                    ]}
+
+                />
             </header>
         )
     }
