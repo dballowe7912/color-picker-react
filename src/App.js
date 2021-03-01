@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Palette from './components/Palette/Palette';
 import PaletteList from './components/PaletteList/PaletteList';
 import SingleColorPalette from './components/SingleColorPalette/SingleColorPalette';
+import NewPaletteForm from './components/NewPaletteForm/NewPaletteForm';
 import seedColors from './seedColors';
 import { generatePalette } from './colorHelpers';
 
@@ -15,6 +16,10 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Route 
+          exact 
+          path='/palette/new' 
+          render={() => <NewPaletteForm/>}/>
         <Route
           exact  
           path='/palette/:paletteId/:colorId' 
